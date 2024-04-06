@@ -1,0 +1,22 @@
+using Gtk 4.0;
+
+Window window {
+  title: 'Bun GTK';
+  default-width: 600;
+  default-height: 300;
+
+  Box {
+    orientation: vertical;
+
+    HeaderBar {
+      [end]
+      MenuButton {
+        icon-name: "open-menu-symbolic";
+      }
+    }
+
+    Label {
+      label: "Hello World";
+    }
+  }
+}
