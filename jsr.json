@@ -1,0 +1,15 @@
+{
+  "name": "@minemobs/bun-gtk",
+  "version": "0.0.1",
+  "exports": {
+    ".": "./dist/lib.ts",
+    "./utils": "./dist/utils.ts"
+  },
+  "publish": {
+    "include": [
+      "LICENSE",
+      "README.md",
+      "dist/*.ts"
+    ]
+  }
+}

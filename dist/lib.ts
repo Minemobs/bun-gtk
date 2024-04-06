@@ -1,7 +1,5 @@
 import { dlopen, suffix } from "bun:ffi";
 
-console.log(`libgtk-4.${suffix}`);
-
 export const libGTK = dlopen(`libgtk-4.${suffix}`, {
   gtk_get_major_version: {
     returns: "uint32_t"
@@ -59,5 +57,21 @@ export const libGTK = dlopen(`libgtk-4.${suffix}`, {
   },
   gtk_box_set_spacing: {
     args: ["ptr", "int8_t"]
+  },
+  gtk_builder_new: {
+    returns: "ptr"
+  },
+  gtk_builder_add_from_file: {
+    args: ["ptr", "cstring", "ptr"]
+  },
+  gtk_builder_get_object: {
+    args: ["ptr", "cstring"],
+    returns: "ptr"
+  },
+  gtk_window_set_application: {
+    args: ["ptr", "ptr"]
+  },
+  gtk_widget_set_visible: {
+    args: ["ptr", "bool"]
   },
 });
