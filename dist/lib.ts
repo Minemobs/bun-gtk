@@ -101,5 +101,30 @@ export const libGTK = dlopen(`libgtk-4.${suffix}`, {
   g_bytes_new: {
     args: ["ptr", "usize"] as const,
     returns: "ptr"
+  },
+  gtk_css_provider_new: {
+    returns: "ptr"
+  },
+  gtk_css_provider_load_from_bytes: {
+    args: ["ptr", "ptr"] as const
+  },
+  gtk_css_provider_load_from_string: {
+    args: ["ptr", "cstring"] as const
+  },
+  gdk_display_get_default: {
+    returns: "ptr"
+  },
+  gtk_style_context_add_provider_for_display: {
+    args: ["ptr", "ptr", "uint32_t"] as const
+  },
+  gtk_widget_add_css_class: {
+    args: ["ptr", "cstring"] as const
+  },
+  gtk_widget_remove_css_class: {
+    args: ["ptr", "cstring"] as const
+  },
+  gtk_widget_get_css_classes: {
+    args: ["ptr"] as const,
+    returns: "ptr"
   }
 });
