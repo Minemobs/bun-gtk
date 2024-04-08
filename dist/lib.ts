@@ -126,5 +126,40 @@ export const libGTK = dlopen(`libgtk-4.${suffix}`, {
   gtk_widget_get_css_classes: {
     args: ["ptr"] as const,
     returns: "ptr"
-  }
+  },
+  gtk_aspect_frame_new: {
+    args: ["f32", "f32", "f32", "bool"] as const,
+    returns: "ptr"
+  },
+  gtk_aspect_frame_set_child: {
+    args: ["ptr", "ptr"] as const
+  },
+  gtk_aspect_frame_get_child: {
+    args: ["ptr"] as const,
+    returns: "ptr"
+  },
+  gtk_aspect_frame_get_ratio: {
+    args: ["ptr"] as const,
+    returns: "f32"
+  },
+  gtk_aspect_frame_get_xalign: {
+    args: ["ptr"] as const,
+    returns: "f32"
+  },
+  gtk_aspect_frame_get_yalign: {
+    args: ["ptr"] as const,
+    returns: "f32"
+  },
+  gtk_aspect_frame_set_obey_child: {
+    args: ["ptr", "bool"] as const,
+    returns: "void"
+  },
+  gtk_aspect_frame_set_ratio: {
+    args: ["ptr", "f32"] as const,
+    returns: "void"
+  },
+  gtk_aspect_frame_get_obey_child: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
 });
