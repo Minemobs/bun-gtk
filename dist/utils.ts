@@ -15,6 +15,13 @@ export const enum Align {
   GTK_ALIGN_BASELINE_CENTER
 }
 
+export const enum ContentFit {
+  GTK_CONTENT_FIT_FILL,
+  GTK_CONTENT_FIT_CONTAIN,
+  GTK_CONTENT_FIT_COVER,
+  GTK_CONTENT_FIT_SCALE_DOWN,
+}
+
 export function toCString(str: string) {
     return Buffer.from(str + "\0", "utf-8");
 }
