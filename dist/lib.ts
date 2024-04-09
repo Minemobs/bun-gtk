@@ -362,4 +362,382 @@ export const libGTK = dlopen(`libgtk-4.${suffix}`, {
     args: ["ptr", "f32"] as const,
     returns: "u32"
   },
+  gtk_box_get_baseline_child: {
+    args: ["ptr"] as const,
+    returns: "u32"
+  },
+  gtk_box_get_baseline_position: {
+    args: ["ptr"] as const,
+    returns: "u32"
+  },
+  gtk_box_get_homogeneous: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
+  gtk_box_get_spacing: {
+    args: ["ptr"] as const,
+    returns: "u32"
+  },
+  gtk_box_insert_child_after: {
+    args: ["ptr", "ptr", "ptr"] as const,
+    returns: "void"
+  },
+  gtk_box_prepend: {
+    args: ["ptr", "ptr"] as const,
+    returns: "void"
+  },
+  gtk_box_remove: {
+    args: ["ptr", "ptr"] as const,
+    returns: "void"
+  },
+  gtk_box_reorder_child_after: {
+    args: ["ptr", "ptr", "ptr"] as const,
+    returns: "void"
+  },
+  gtk_box_set_baseline_child: {
+    args: ["ptr", "u32"] as const,
+    returns: "void"
+  },
+  gtk_box_set_baseline_position: {
+    args: ["ptr", "u32"] as const,
+    returns: "void"
+  },
+  gtk_box_set_homogeneous: {
+    args: ["ptr", "bool"] as const,
+    returns: "void"
+  },
+  gtk_application_add_window: {
+    args: ["ptr", "ptr"] as const,
+    returns: "void"
+  },
+  gtk_application_get_accels_for_action: {
+    args: ["ptr", "cstring"] as const,
+    returns: "ptr"
+  },
+  gtk_application_get_actions_for_accel: {
+    args: ["ptr", "cstring"] as const,
+    returns: "ptr"
+  },
+  gtk_application_get_active_window: {
+    args: ["ptr"] as const,
+    returns: "ptr"
+  },
+  gtk_application_get_menu_by_id: {
+    args: ["ptr", "cstring"] as const,
+    returns: "ptr"
+  },
+  gtk_application_get_menubar: {
+    args: ["ptr"] as const,
+    returns: "ptr"
+  },
+  gtk_application_get_window_by_id: {
+    args: ["ptr", "u32"] as const,
+    returns: "ptr"
+  },
+  gtk_application_get_windows: {
+    args: ["ptr"] as const,
+    returns: "ptr"
+  },
+  gtk_application_inhibit: {
+    args: ["ptr", "ptr", "u32", "cstring"] as const,
+    returns: "void"
+  },
+  gtk_application_list_action_descriptions: {
+    args: ["ptr"] as const,
+    returns: "ptr"
+  },
+  gtk_application_remove_window: {
+    args: ["ptr", "ptr"] as const,
+    returns: "void"
+  },
+  gtk_application_set_accels_for_action: {
+    args: ["ptr", "cstring", "ptr"] as const,
+    returns: "void"
+  },
+  gtk_application_set_menubar: {
+    args: ["ptr", "ptr"] as const,
+    returns: "void"
+  },
+  gtk_application_uninhibit: {
+    args: ["ptr", "u32"] as const,
+    returns: "void"
+  },
+  gtk_window_new: {
+    args: [] as const,
+    returns: "ptr"
+  },
+  gtk_window_close: {
+    args: ["ptr"] as const,
+    returns: "void"
+  },
+  gtk_window_destroy: {
+    args: ["ptr"] as const,
+    returns: "void"
+  },
+  gtk_window_fullscreen: {
+    args: ["ptr"] as const,
+    returns: "void"
+  },
+  gtk_window_fullscreen_on_monitor: {
+    args: ["ptr", "ptr"] as const,
+    returns: "u32"
+  },
+  gtk_window_get_application: {
+    args: ["ptr"] as const,
+    returns: "ptr"
+  },
+  gtk_window_get_child: {
+    args: ["ptr"] as const,
+    returns: "ptr"
+  },
+  gtk_window_get_decorated: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
+  gtk_window_get_default_size: {
+    args: ["ptr", "ptr", "ptr"] as const,
+    returns: "u32"
+  },
+  gtk_window_get_default_widget: {
+    args: ["ptr"] as const,
+    returns: "ptr"
+  },
+  gtk_window_get_deletable: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
+  gtk_window_get_destroy_with_parent: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
+  gtk_window_get_focus: {
+    args: ["ptr"] as const,
+    returns: "ptr"
+  },
+  gtk_window_get_focus_visible: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
+  gtk_window_get_group: {
+    args: ["ptr"] as const,
+    returns: "ptr"
+  },
+  gtk_window_get_handle_menubar_accel: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
+  gtk_window_get_hide_on_close: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
+  gtk_window_get_icon_name: {
+    args: ["ptr"] as const,
+    returns: "cstring"
+  },
+  gtk_window_get_mnemonics_visible: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
+  gtk_window_get_modal: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
+  gtk_window_get_resizable: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
+  gtk_window_get_title: {
+    args: ["ptr"] as const,
+    returns: "cstring"
+  },
+  gtk_window_get_titlebar: {
+    args: ["ptr"] as const,
+    returns: "ptr"
+  },
+  gtk_window_get_transient_for: {
+    args: ["ptr"] as const,
+    returns: "ptr"
+  },
+  gtk_window_has_group: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
+  gtk_window_is_active: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
+  gtk_window_is_fullscreen: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
+  gtk_window_is_maximized: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
+  gtk_window_is_suspended: {
+    args: ["ptr"] as const,
+    returns: "bool"
+  },
+  gtk_window_maximize: {
+    args: ["ptr"] as const,
+    returns: "void"
+  },
+  gtk_window_minimize: {
+    args: ["ptr"] as const,
+    returns: "void"
+  },
+  gtk_window_present_with_time: {
+    args: ["ptr", "u32"] as const,
+    returns: "void"
+  },
+  gtk_window_set_decorated: {
+    args: ["ptr", "bool"] as const,
+    returns: "void"
+  },
+  gtk_window_set_default_widget: {
+    args: ["ptr", "ptr"] as const,
+    returns: "void"
+  },
+  gtk_window_set_deletable: {
+    args: ["ptr", "bool"] as const,
+    returns: "void"
+  },
+  gtk_window_set_destroy_with_parent: {
+    args: ["ptr", "bool"] as const,
+    returns: "void"
+  },
+  gtk_window_set_display: {
+    args: ["ptr", "ptr"] as const,
+    returns: "void"
+  },
+  gtk_window_set_focus: {
+    args: ["ptr", "ptr"] as const,
+    returns: "void"
+  },
+  gtk_window_set_focus_visible: {
+    args: ["ptr", "bool"] as const,
+    returns: "void"
+  },
+  gtk_window_set_handle_menubar_accel: {
+    args: ["ptr", "bool"] as const,
+    returns: "void"
+  },
+  gtk_window_set_hide_on_close: {
+    args: ["ptr", "bool"] as const,
+    returns: "void"
+  },
+  gtk_window_set_icon_name: {
+    args: ["ptr", "cstring"] as const,
+    returns: "void"
+  },
+  gtk_window_set_mnemonics_visible: {
+    args: ["ptr", "bool"] as const,
+    returns: "void"
+  },
+  gtk_window_set_modal: {
+    args: ["ptr", "bool"] as const,
+    returns: "void"
+  },
+  gtk_window_set_resizable: {
+    args: ["ptr", "bool"] as const,
+    returns: "void"
+  },
+  gtk_window_set_startup_id: {
+    args: ["ptr", "cstring"] as const,
+    returns: "void"
+  },
+  gtk_window_set_titlebar: {
+    args: ["ptr", "ptr"] as const,
+    returns: "void"
+  },
+  gtk_window_set_transient_for: {
+    args: ["ptr", "ptr"] as const,
+    returns: "void"
+  },
+  gtk_window_unfullscreen: {
+    args: ["ptr"] as const,
+    returns: "void"
+  },
+  gtk_window_unmaximize: {
+    args: ["ptr"] as const,
+    returns: "void"
+  },
+  gtk_window_unminimize: {
+    args: ["ptr"] as const,
+    returns: "void"
+  },
+  g_application_get_application_id: {
+    args: ["ptr"] as const,
+    returns: "cstring"
+  },
+  g_application_get_flags: {
+    args: ["ptr"] as const,
+    returns: "u32",
+  },
+  gtk_application_window_get_id: {
+    args: ["ptr"] as const,
+    returns: "u32"
+  }
 });
+
+export const enum Orientation {
+  GTK_ORIENTATION_HORIZONTAL,
+  GTK_ORIENTATION_VERTICAL
+}
+
+export const enum Align {
+  GTK_ALIGN_FILL,
+  GTK_ALIGN_START,
+  GTK_ALIGN_END,
+  GTK_ALIGN_CENTER,
+  GTK_ALIGN_BASELINE_FILL,
+  GTK_ALIGN_BASELINE = 4,
+  GTK_ALIGN_BASELINE_CENTER
+}
+
+export const enum ContentFit {
+  GTK_CONTENT_FIT_FILL,
+  GTK_CONTENT_FIT_CONTAIN,
+  GTK_CONTENT_FIT_COVER,
+  GTK_CONTENT_FIT_SCALE_DOWN,
+}
+
+export const enum EllipsizeMode {
+  PANGO_ELLIPSIZE_NONE = 0,
+  PANGO_ELLIPSIZE_START = 1,
+  PANGO_ELLIPSIZE_MIDDLE = 2,
+  PANGO_ELLIPSIZE_END = 3
+}
+
+export const enum NaturalWrapMode {
+  GTK_NATURAL_WRAP_INHERIT = 0,
+  GTK_NATURAL_WRAP_NONE = 1,
+  GTK_NATURAL_WRAP_WORD = 2
+}
+
+export const enum Justification {
+  GTK_JUSTIFY_LEFT = 0,
+  GTK_JUSTIFY_RIGHT = 1,
+  GTK_JUSTIFY_CENTER = 2,
+  GTK_JUSTIFY_FILL = 3
+}
+
+export const enum ApplicationFlags {
+  G_APPLICATION_FLAGS_NONE = 0,
+  G_APPLICATION_DEFAULT_FLAGS = 0,
+  G_APPLICATION_IS_SERVICE = 1,
+  G_APPLICATION_IS_LAUNCHER = 2,
+  G_APPLICATION_HANDLES_OPEN = 4,
+  G_APPLICATION_HANDLES_COMMAND_LINE = 8,
+  G_APPLICATION_SEND_ENVIRONMENT = 16,
+  G_APPLICATION_NON_UNIQUE = 32,
+  G_APPLICATION_CAN_OVERRIDE_APP_ID = 64,
+  G_APPLICATION_ALLOW_REPLACEMENT = 128,
+  G_APPLICATION_REPLACE = 256,
+}
+
+export const GTK_STYLE_PROVIDER_PRIORITY_FALLBACK = 1;
+export const GTK_STYLE_PROVIDER_PRIORITY_THEME = 200;
+export const GTK_STYLE_PROVIDER_PRIORITY_SETTINGS = 400;
+export const GTK_STYLE_PROVIDER_PRIORITY_APPLICATION = 600;
+export const GTK_STYLE_PROVIDER_PRIORITY_USER = 800;
