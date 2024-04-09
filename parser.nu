@@ -1,7 +1,8 @@
 #!/usr/bin/env nu
 
 def convertTypes [type: string] {
-  match $type {
+  let cleanedType = $type | split row " " | last
+  match $cleanedType {
     "gboolean" => "bool"
     "float" | "gfloat" => "f32"
     "double" | "gdouble" => "f64"
@@ -17,14 +18,14 @@ def convertTypes [type: string] {
     "gconstpointer" => "ptr"
     "gsize" => "usize"
     "char*" => "cstring"
-    _ => { if (($type) | str ends-with "*") { "ptr" } else { "void" } }
+    _ => { if (($cleanedType) | str ends-with "*") { "ptr" } else { "u32" } }
   }
 }
 
 def parseFunction [url: string] {
     let array = http get $url | query web -q ".highlight" | each { str join } | flatten | get 0 | split row "\n"
     let returnType = convertTypes ($array | get 0)
-    let params = $array | skip 2 | drop 2 | each { | it | convertTypes ( $it | str trim | split row " " | get 0 ) } | each { | it | $"\"($it)\"" }
+    let params = $array | skip 2 | drop 2 | each { | it | convertTypes ( $it | str trim | split row " " | drop | last ) } | each { | it | $"\"($it)\"" }
     let functionName = $array | get 1 | split row " " | get 0
     $"($functionName): {
       args: ($params) as const,
@@ -51,12 +52,12 @@ def parseClass [url: string] {
 }
 
 def main [url: string] {
-  if "gtk4/methods" in $url {
+  if "/methods" in $url or "/ctor" in $url {
     parseFunction $url
-  } else if "gtk4/enum" in $url {
+  } else if "/enum" in $url {
     # error make {msg: "Not supported yet !"}
     parseEnum $url
-  } else if "gtk4/class" in $url {
+  } else if "/class" in $url {
     parseClass $url
   } else {
     error make {msg: "Not supported yet !"}

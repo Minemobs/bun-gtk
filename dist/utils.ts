@@ -22,6 +22,26 @@ export const enum ContentFit {
   GTK_CONTENT_FIT_SCALE_DOWN,
 }
 
+export const enum EllipsizeMode {
+  PANGO_ELLIPSIZE_NONE = 0,
+  PANGO_ELLIPSIZE_START = 1,
+  PANGO_ELLIPSIZE_MIDDLE = 2,
+  PANGO_ELLIPSIZE_END = 3
+}
+
+export const enum NaturalWrapMode {
+  GTK_NATURAL_WRAP_INHERIT = 0,
+  GTK_NATURAL_WRAP_NONE = 1,
+  GTK_NATURAL_WRAP_WORD = 2
+}
+
+export const enum Justification {
+  GTK_JUSTIFY_LEFT = 0,
+  GTK_JUSTIFY_RIGHT = 1,
+  GTK_JUSTIFY_CENTER = 2,
+  GTK_JUSTIFY_FILL = 3
+}
+
 export const GTK_STYLE_PROVIDER_PRIORITY_FALLBACK = 1;
 export const GTK_STYLE_PROVIDER_PRIORITY_THEME = 200;
 export const GTK_STYLE_PROVIDER_PRIORITY_SETTINGS = 400;
@@ -29,5 +49,5 @@ export const GTK_STYLE_PROVIDER_PRIORITY_APPLICATION = 600;
 export const GTK_STYLE_PROVIDER_PRIORITY_USER = 800;
 
 export function toCString(str: string) {
-    return Buffer.from(str + "\0", "utf-8");
+  return Buffer.from(str + "\0", "utf-8");
 }
