@@ -1,5 +1,4 @@
 bun.lockb
 node_modules
-bun-linux-x64-profile/
-*.ui
-**/**.png
+test/assets/**.png
+test/*.ui

@@ -1,13 +1,27 @@
 import type { Pointer } from "bun:ffi";
-import { JSCallback } from "bun:ffi";
+import { JSCallback, ptr, CString, read } from "bun:ffi";
 import { ApplicationFlags, Orientation, libGTK } from "./lib";
-import type { BunFile } from "bun";
 
 const gtk = libGTK.symbols;
 
 type Ptr = Pointer | null;
 type FFIObject = { pointer: Ptr };
 type UnExtends<T, Z = Widget> = Omit<T, keyof Z> & FFIObject;
+
+function readStringArray(array: Pointer | null): string[] {
+  if(array == null) return [];
+  const arr: string[] = [];
+  let offset = 0;
+  while(true) {
+    const calculatedOffset = offset * BigInt64Array.BYTES_PER_ELEMENT;
+    const pointer = read.ptr(array, calculatedOffset) as Pointer;
+    const str = new CString(pointer);
+    if(str.length === 0) break;
+    arr.push(str.toString());
+    offset++;
+  }
+  return arr;
+}
 
 export interface GObject extends FFIObject {
   signalConnect(detailedSignal: string, callback: (obj: Ptr, data: Ptr) => void, data: Ptr): void;
@@ -41,6 +55,7 @@ export interface Widget extends GObject {
   setHExpand(expand: boolean): void;
   addCssClass(cssClass: string): void;
   hasCssClass(cssClass: string): boolean;
+  getCssClasses(): string[];
   removeCssClass(cssClass: string): void;
 }
 
@@ -84,6 +99,7 @@ function newWidget(pointer: Ptr): Widget {
     addCssClass(cssClass) { gtk.gtk_widget_add_css_class(this.pointer, toCString(cssClass)) },
     hasCssClass(cssClass) { return gtk.gtk_widget_has_css_class(this.pointer, toCString(cssClass)) },
     removeCssClass(cssClass) { gtk.gtk_widget_remove_css_class(this.pointer, toCString(cssClass)) },
+    getCssClasses() { return readStringArray(gtk.gtk_widget_get_css_classes(this.pointer)) },
     //TODO: Add support for data param
     signalConnect(id, callback, data) { return defaultSignalConnect(this.pointer, id, callback, data) },
     setVExpand(b) { gtk.gtk_widget_set_vexpand(this.pointer, b) },
