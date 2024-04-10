@@ -677,7 +677,23 @@ export const libGTK = dlopen(`libgtk-4.${suffix}`, {
   gtk_application_window_get_id: {
     args: ["ptr"] as const,
     returns: "u32"
-  }
+  },
+  gtk_application_window_get_help_overlay: {
+      args: ["ptr"] as const,
+      returns: "ptr"
+  },
+  gtk_application_window_get_show_menubar: {
+      args: ["ptr"] as const,
+      returns: "bool"
+  },
+  gtk_application_window_set_help_overlay: {
+      args: ["ptr", "ptr"] as const,
+      returns: "void"
+  },
+  gtk_application_window_set_show_menubar: {
+      args: ["ptr", "bool"] as const,
+      returns: "void"
+  },
 });
 
 export const enum Orientation {

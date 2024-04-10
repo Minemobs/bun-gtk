@@ -8,8 +8,6 @@ type Ptr = Pointer | null;
 type FFIObject = { pointer: Ptr };
 type UnExtends<T, Z = Widget> = Omit<T, keyof Z> & FFIObject;
 
-const textDecoder = new TextDecoder();
-
 export interface GObject extends FFIObject {
   signalConnect(detailedSignal: string, callback: (obj: Ptr, data: Ptr) => void, data: Ptr): void;
   // signalConnectData<T>(detailedSignal: string, callback: (obj: GObject, data: T) => void, data: T, destroyData: null, connectFlags: number): void;

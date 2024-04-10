@@ -1,5 +1,5 @@
-import { ApplicationFlags } from "./lib";
-import { newApplication, newApplicationWindow } from "./utils";
+import { ApplicationFlags } from "./dist/lib";
+import { newApplication, newApplicationWindow } from "./dist/utils";
 
 const app = newApplication("fr.minemobs.bun-gtk-test", ApplicationFlags.G_APPLICATION_DEFAULT_FLAGS);
 app.signalConnect("activate", () => {

@@ -28,9 +28,8 @@ def parseFunction [url: string] {
       flatten | get 0 | split row "\n"
     let returnType = convertTypes ($array | get 0)
     let params = $array | skip 2 | drop 2 |
-      filter { | it | ($it | str trim | split row " " | length) > 1 }
-      each { | it | convertTypes ( $it | str trim | split row " " | drop | last ) } |
-      each { | it | $"\"($it)\"" }
+      each { | it | convertTypes ( if (($it | str trim | split row " " | length) > 1) { $it | str trim | split row " " | drop | last } else { $it | str trim | split row " " } ) } |
+      each {|it| $"\"($it)\"" }
     let functionName = $array | get 1 | split row " " | get 0
     $"($functionName): {
       args: ($params) as const,
@@ -54,7 +53,7 @@ def parseClass [url: string] {
   let constructors = $html | query web -q ".constructors > .docblock > div > h6 > a" -a href | flatten |
     each { | it | parseFunction $"https://docs.gtk.org/gtk4/($it)"} | str join ""
   let functions = $html | query web -q ".methods > .docblock > div > h6 > a" -a href | flatten |
-    filter { | it | not ($it in "method") }
+    filter { | it | not ($it in "method") } |
     each { | it | parseFunction $"https://docs.gtk.org/gtk4/($it)"} | str join ""
   $"($constructors)($functions)"
 }
