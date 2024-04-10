@@ -1,6 +1,7 @@
 import type { Pointer } from "bun:ffi";
 import { JSCallback } from "bun:ffi";
 import { ApplicationFlags, Orientation, libGTK } from "./lib";
+import type { BunFile } from "bun";
 
 const gtk = libGTK.symbols;
 
@@ -38,6 +39,9 @@ export interface ApplicationWindow extends Window {
 export interface Widget extends GObject {
   setVExpand(expand: boolean): void;
   setHExpand(expand: boolean): void;
+  addCssClass(cssClass: string): void;
+  hasCssClass(cssClass: string): boolean;
+  removeCssClass(cssClass: string): void;
 }
 
 export interface Box extends Widget {
@@ -49,22 +53,55 @@ export interface Box extends Widget {
   getSpacing(): number;
 };
 
+export interface CssProvider extends GObject {
+  load(from: string | ArrayBuffer): void;
+  loadFromPath(path: string): void;
+}
+
+export interface Label extends Widget {
+  setMarkup(markup: string): void;
+}
+
 function defaultSignalConnect(ptr: Ptr, id: string, callback: (obj: Ptr, data: Ptr) => void, data: Ptr) {
-  gtk.g_signal_connect_data(ptr, toCString(id), new JSCallback((obj, data) => callback(obj, data), { args: ["ptr", "ptr"] }).ptr, null, null, 0);
+  gtk.g_signal_connect_data(ptr, toCString(id), new JSCallback((obj, data) => callback(obj, data), { args: ["ptr", "ptr"] }).ptr, data, null, 0);
+}
+
+export function newCssProvider(): CssProvider {
+  return {
+    signalConnect(id, callback, data) { return defaultSignalConnect(this.pointer, id, callback, data) },
+    pointer: gtk.gtk_css_provider_new(),
+    loadFromPath(path) { gtk.gtk_css_provider_load_from_path(this.pointer, toCString(path)) },
+    load(from) {
+      if(typeof from === "string") return gtk.gtk_css_provider_load_from_string(this.pointer, toCString(from));
+      gtk.gtk_css_provider_load_from_bytes(this.pointer, new Uint8Array(from));
+    },
+  }
 }
 
 function newWidget(pointer: Ptr): Widget {
   return {
+    pointer,
+    addCssClass(cssClass) { gtk.gtk_widget_add_css_class(this.pointer, toCString(cssClass)) },
+    hasCssClass(cssClass) { return gtk.gtk_widget_has_css_class(this.pointer, toCString(cssClass)) },
+    removeCssClass(cssClass) { gtk.gtk_widget_remove_css_class(this.pointer, toCString(cssClass)) },
     //TODO: Add support for data param
     signalConnect(id, callback, data) { return defaultSignalConnect(this.pointer, id, callback, data) },
-    pointer,
     setVExpand(b) { gtk.gtk_widget_set_vexpand(this.pointer, b) },
     setHExpand(b) { gtk.gtk_widget_set_hexpand(this.pointer, b) },
-  }  
+  }
 }
 
 function setWidgetProperties<T extends Widget>(extendedWidget: UnExtends<T>, widget: Widget) {
   Object.keys(widget).forEach(it => (extendedWidget as Record<string, unknown>)[it] = widget[it as keyof typeof widget]);  
+}
+
+export function newLabel(text: string): Label {
+  const label: UnExtends<Label> = {
+    pointer: gtk.gtk_label_new(toCString(text)),
+    setMarkup(markup) { gtk.gtk_label_set_markup(this.pointer, toCString(markup)) },
+  };
+  setWidgetProperties(label, newWidget(label.pointer));
+  return label as Label;
 }
 
 function newApplicationFromPointer(app: Ptr) {

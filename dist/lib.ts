@@ -694,6 +694,34 @@ export const libGTK = dlopen(`libgtk-4.${suffix}`, {
       args: ["ptr", "bool"] as const,
       returns: "void"
   },
+  gtk_css_provider_load_from_data: {
+      args: ["ptr", "cstring", "u32"] as const,
+      returns: "void"
+  },
+  gtk_css_provider_load_from_file: {
+      args: ["ptr", "ptr"] as const,
+      returns: "void"
+  },
+  gtk_css_provider_load_from_path: {
+      args: ["ptr", "cstring"] as const,
+      returns: "void"
+  },
+  gtk_css_provider_load_from_resource: {
+      args: ["ptr", "cstring"] as const,
+      returns: "void"
+  },
+  gtk_css_provider_load_named: {
+      args: ["ptr", "cstring", "cstring"] as const,
+      returns: "void"
+  },
+  gtk_css_provider_to_string: {
+      args: ["ptr"] as const,
+      returns: "cstring"
+  },
+  gtk_widget_has_css_class: {
+    args: ["ptr", "cstring"] as const,
+    returns: "bool"
+  },
 });
 
 export const enum Orientation {
