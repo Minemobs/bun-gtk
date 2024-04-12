@@ -1,15 +1,15 @@
 import { ApplicationFlags, Orientation } from "../dist/lib";
-import { newApplication, newApplicationWindow, newBox, newLabel } from "../dist/utils";
+import { Application, ApplicationWindow, Box, Label } from "../dist/utils";
 
-const app = newApplication("fr.minemobs.bun-gtk-test", ApplicationFlags.G_APPLICATION_DEFAULT_FLAGS);
+const app = new Application("fr.minemobs.bun-gtk-test", ApplicationFlags.G_APPLICATION_DEFAULT_FLAGS);
 app.signalConnect("activate", () => {
-  const window = newApplicationWindow(app);
-  window.setTitle("Gtk Bun Test");
+  const window = new ApplicationWindow(app);
+  window.setTitle("GTK Bun Test");
   window.setDefaultSize(200, 200);
 
-  const box = newBox(Orientation.GTK_ORIENTATION_VERTICAL);
+  const box = new Box(Orientation.GTK_ORIENTATION_VERTICAL);
   window.setChild(box);
-  const label = newLabel("Hello World");
+  const label = new Label("Hello World");
   label.addCssClass("test");
   label.addCssClass("stuff");
   label.getCssClasses().forEach(it => console.log(`Css Class: ${it}`));

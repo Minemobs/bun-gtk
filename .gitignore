@@ -2,3 +2,4 @@ bun.lockb
 node_modules
 test/assets/**.png
 test/*.ui
+docs/

@@ -1,8 +1,8 @@
 import "./builder.blp";
 import { JSCallback, ptr } from "bun:ffi";
 import type { Pointer } from "bun:ffi";
-import { libGTK, Align, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION, Orientation } from "./dist/lib";
-import { toCString } from "./dist/utils";
+import { libGTK, Align, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION, Orientation } from "../dist/lib";
+import { toCString } from "../dist/utils";
 
 Bun.spawnSync({
   cmd: ["blueprint-compiler", "compile", "builder.blp", "--output", "builder.ui"],
